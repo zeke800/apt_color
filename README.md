@@ -9,6 +9,11 @@ Neat, huh? Anyways, here's how to use it :)
 
 After seeing too many black and white ugly images. Moving on.
 
+# Get. Rid. Of. The. Yellow. Tinge.
+
+Coming soon! It is quite complex, though, so it may take a while. While you wait, get an HRPT setup.
+
+
 # How to run it
 
 ...
