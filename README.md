@@ -16,4 +16,6 @@ Coming soon! It is quite complex, though, so it may take a while. While you wait
 
 # How to run it
 
-...
+MakeRGB.py takes in two arguments - cha.png, chb.png, output.png. (Note that if you are using the BETA version you also need to specify the -y flag to remove yellow or not.) To generate seperate channels from APT images, use the channelseperate.py script (input.png, cha.png, chb.png)!
+
+
