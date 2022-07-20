@@ -11,8 +11,8 @@ except:
     args.append("-noir")
 
 #images
-ch2 = Image.open("chb_4.png").convert("L")
-ch4 = Image.open("cha_4.png").convert("L")
+ch2 = Image.open("cha.png").convert("L")
+ch4 = Image.open("chb.png").convert("L")
 
 #ch4 = PIL.ImageOps.invert(ch4)
 #ch4 = PIL.ImageOps.autocontrast(ch4)
