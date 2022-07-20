@@ -20,6 +20,13 @@ Essentially, the visible channel gets too bright. When making an HRPT composite,
 
 # How to run it
 
-MakeRGB.py takes in two arguments - cha.png, chb.png, output.png. (Note that if you are using the BETA version you also need to specify the -y flag to remove yellow or not.) To generate seperate channels from APT images, use the channelseperate.py script (input.png, cha.png, chb.png)!
+MakeRGB.py takes in one argument -ir (used to do ir blend on a sunset scene). It looks for two images called cha.png and chb.ong To generate seperate channels from APT images, use the channelseperate.py script (input.png, cha.png, chb.png)! Note that the images are actually **almost** the same size but still need to be resized seperately. Work in progress. 
+
+# Image Gallery
+![image](https://user-images.githubusercontent.com/82127189/179874305-f79dab5b-1c4c-4227-b4fd-fd2273783c05.png)
+![image](https://user-images.githubusercontent.com/82127189/179874347-7ae5fa79-27be-4935-b0d9-2ff2352627f0.png)
+![image](https://user-images.githubusercontent.com/82127189/179874370-1a154e36-0a6a-4f34-9ae1-92bbd588d747.png)
+![image](https://user-images.githubusercontent.com/82127189/179874382-27db0415-18b0-437b-847d-633d82fd50d4.png)
+
 
 
