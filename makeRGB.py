@@ -1,4 +1,4 @@
-#Convert APT images to color (224 composition)
+#Zeke800's APT colorizer
 from PIL import Image
 import PIL.ImageOps
 import sys
