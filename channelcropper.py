@@ -21,5 +21,8 @@ chb = i.crop((left, upper, right, lower))
 
 #chb.show()
 
+cha = cha.resize((909,ysize), Image.ANTIALIAS)
+chb = chb.resize((909,ysize), Image.ANTIALIAS)
+
 cha.save(sys.argv[2])
 chb.save(sys.argv[3])
