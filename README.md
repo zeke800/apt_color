@@ -21,11 +21,10 @@ Essentially, the visible channel gets too bright. When making an HRPT composite,
 
 # How to run it
 
-MakeRGB.py takes in one argument -ir (used to do ir blend on a sunset scene). It looks for two images called cha.png and chb.png. Color images are saved in color.png. Note that if the resulting image has poor contrast (or looks very blue), then use the -boost argument to try to compensate for this. Adjust the values in the script if needed, although the default ones seem to work OK.
-
-To generate seperate channels from APT images, use the channelseperate.py script (input.png, cha.png, chb.png)! Note that the images are actually **almost** the same size but still need to be resized seperately. Work in progress.
-
-
+```
+python channelseperate.py input.png cha.png chb.png
+python makergb.py -ir (do ir blend) -boost (boost the land color on very blue images) cha.png chb.png
+```
 
 # Image Gallery
 ![image](https://user-images.githubusercontent.com/82127189/179874305-f79dab5b-1c4c-4227-b4fd-fd2273783c05.png)
