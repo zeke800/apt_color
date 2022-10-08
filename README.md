@@ -20,10 +20,10 @@ Essentially, the visible channel gets too bright. When making an HRPT composite,
 
 
 # How to run it
-There are two seperate scripts - channelseperate seperates channels from a raw APT image, and makergb uses the channels to create the final composite (output image is in color.png).
+There are two seperate scripts - channelcropper seperates channels from a raw APT image, and makeRGB uses the channels to create the final composite (output image is in color.png).
 ```
-python channelseperate.py input.png cha.png chb.png
-python makergb.py -ir (do ir blend) -boost (boost the land color on very blue images) cha.png chb.png
+python channelcropper.py input.png cha.png chb.png
+python makeRGB.py -ir (do ir blend) -boost (boost the land color on very blue images) cha.png chb.png
 ```
 
 # Image Gallery
