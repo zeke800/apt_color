@@ -12,17 +12,29 @@ iar = i.load()
 xsize,ysize = i.size
 cha = Image.new('RGB',(APT_CH_WIDTH,ysize))
 chb = Image.new('RGB',(APT_CH_WIDTH,ysize))
-(left, upper, right, lower) = (APT_SYNC_WIDTH+APT_SPC_WIDTH, 1,APT_SYNC_WIDTH+APT_SPC_WIDTH+APT_CH_WIDTH-10,ysize)
+
+(left, upper, right, lower) = (
+        APT_SYNC_WIDTH + APT_SPC_WIDTH,
+        1,
+        APT_SYNC_WIDTH + APT_SPC_WIDTH + APT_CH_WIDTH - 10,
+        ysize
+    )
 cha = i.crop((left, upper, right, lower))
+
 #cha.show()
-(left, upper, right, lower) = (APT_SYNC_WIDTH+APT_SPC_WIDTH+APT_CH_WIDTH+APT_SYNC_WIDTH+APT_SPC_WIDTH+APT_TELE_WIDTH, 1,APT_SYNC_WIDTH+APT_SPC_WIDTH+APT_CH_WIDTH+APT_SYNC_WIDTH+APT_SPC_WIDTH+APT_CH_WIDTH+10,ysize)
+(left, upper, right, lower) = (
+        APT_SYNC_WIDTH + APT_SPC_WIDTH + APT_CH_WIDTH + APT_SYNC_WIDTH + APT_SPC_WIDTH + APT_TELE_WIDTH,
+        1,
+        APT_SYNC_WIDTH + APT_SPC_WIDTH + APT_CH_WIDTH + APT_SYNC_WIDTH + APT_SPC_WIDTH + APT_TELE_WIDTH + APT_CH_WIDTH - 10,
+        ysize
+    )
 
 chb = i.crop((left, upper, right, lower))
 
 #chb.show()
 
-cha = cha.resize((909,ysize), Image.ANTIALIAS)
-chb = chb.resize((909,ysize), Image.ANTIALIAS)
+cha = cha.resize((APT_CH_WIDTH,ysize), Image.ANTIALIAS)
+chb = chb.resize((APT_CH_WIDTH,ysize), Image.ANTIALIAS)
 
 cha.save(sys.argv[2])
 chb.save(sys.argv[3])
