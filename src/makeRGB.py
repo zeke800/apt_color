@@ -4,6 +4,7 @@ import argparse
 
 from array import array
 from PIL import Image, ImageOps
+from channelcropper import divide
 
 
 # Constants
@@ -15,25 +16,29 @@ CH4_BOOST = 0.5
 
 
 def parse_args() -> dict:
-    parser = argparse.ArgumentParser(description='NOAA APT Colorizer CLI', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-m', '--mode', type=str, default='noir', help='The mode, can be "ir", "ir_night", or "sunset"')
+    parser = argparse.ArgumentParser(description='APT Colorizer CLI',
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-m', '--mode', type=str, default='noir',
+                        help='The mode. It can be "ir", "ir_night", "sunset", or "noir"')
     parser.add_argument('-b', '--boost', action='store_true', help='Boost the land color on very blue images')
-    parser.add_argument('cha', help='Source of channel A')
-    parser.add_argument('chb', help='Source of channel B')
-    args = parser.parse_args()
+    parser.add_argument('src', help='The raw APT image taken from the satellite')
+    # parser.add_argument('cha', help='Source of channel A')
+    # parser.add_argument('chb', help='Source of channel B')
+    arguments = parser.parse_args()
 
-    return vars(args)
+    return vars(arguments)
 
 
-def get_images_arrays(arguments: dict) -> [array, array]:
-    ch2 = Image.open(arguments['cha']).convert('L')
-    ch2 = ImageOps.autocontrast(ch2)
-    ch2_array = ch2.load()
+def get_images_arrays(arguments: dict) -> [tuple, array, array]:
+    image = Image.open(arguments['src']).convert('L')
+    channel2, channel4 = divide(image)
 
-    ch4 = Image.open(arguments['chb']).convert('L')
-    ch4_array = ch4.load()
+    channel2 = ImageOps.autocontrast(channel2)
+    ch2_array = channel2.load()
 
-    return ch2.size, ch2_array, ch4_array
+    ch4_array = channel4.load()
+
+    return channel2.size, ch2_array, ch4_array
 
 
 def colour(ch2_array: array, ch4_array: array, size: tuple, arguments: dict) -> Image:
@@ -51,7 +56,7 @@ def colour(ch2_array: array, ch4_array: array, size: tuple, arguments: dict) -> 
         case 'ir_night':
             for y in range(ysize):
                 for x in range(xsize):
-                    if (ch2_array[x,y] - ch4_array[x,y]) <= -40:
+                    if (ch2_array[x, y] - ch4_array[x, y]) <= -40:
                         outimg.putpixel((x, y), (round(ch2_array[x, y] * 0.8 + ch4_array[x,y] * 0.2),
                                                  round(ch2_array[x,y] * 0.8 + ch4_array[x,y] * 0.2),
                                                  round(ch2_array[x,y] * 0.8 + ch4_array[x,y] * 0.2)))
@@ -60,7 +65,7 @@ def colour(ch2_array: array, ch4_array: array, size: tuple, arguments: dict) -> 
         case 'sunset':
             for y in range(ysize):
                 for x in range(xsize):
-                    if (ch2_array[x,y] - ch4_array[x,y]) <= -40:
+                    if (ch2_array[x, y] - ch4_array[x, y]) <= -40:
                         outimg.putpixel((x, y), (round(ch2_array[x, y] * CH2_BLEND),
                                                  round(ch2_array[x, y] * CH2_BLEND),
                                                  round(ch4_array[x, y] * ch2_array[x, y] / CH4_BLEND)))
@@ -91,16 +96,16 @@ def boost(image: Image, size: array, arguments: dict) -> Image:
 
 
 def export_image(image: Image):
-    out_image = ImageOps.autocontrast(image)
+    oimage = ImageOps.autocontrast(image)
 
-    out_image.show()
-    out_image.save('color.png')
+    oimage.show()
+    oimage.save('../out/color.png')
 
 
 if __name__ == '__main__':
     args: dict = parse_args()
-    size, ch2, ch4 = get_images_arrays(args)
-    image = colour(ch2, ch4, size, args)
-    image = boost(image, size, args)
+    image_size, ch2, ch4 = get_images_arrays(args)
+    out_image = colour(ch2, ch4, image_size, args)
+    out_image = boost(out_image, image_size, args)
 
-    export_image(image)
+    export_image(out_image)

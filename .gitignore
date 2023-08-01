@@ -161,3 +161,4 @@ cython_debug/
 .fleet
 .vscode
 .DS_Store
+out/*.png
