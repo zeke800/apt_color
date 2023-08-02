@@ -21,7 +21,7 @@ Essentially, the visible channel gets too bright. When making an HRPT composite,
 There is a single script that seperates channels from a raw APT image, and uses the channels to create the final composite. Both the two channels and the colored image are available in the `out/` directory.
 
 ```
-$ ./src/makeRGB.py --help
+$ python ./src/makeRGB.py --help
 usage: makeRGB.py [-h] [-m MODE] [-b] src
 
 APT Colorizer CLI
@@ -36,7 +36,7 @@ options:
 ```
 
 ```
-./src/makeRGB.py input.png --boost --mode noir
+python ./makeRGB.py input.png --boost --mode noir
 ```
 
 # Image Gallery
